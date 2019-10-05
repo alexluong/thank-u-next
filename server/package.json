@@ -1,0 +1,35 @@
+{
+  "name": "@tyn/server",
+  "private": true,
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon src/index.js --exec babel-node",
+    "build": "babel src -d build"
+  },
+  "dependencies": {
+    "apollo-datasource": "^0.6.3",
+    "apollo-server-express": "^2.9.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "graphql": "^14.5.8",
+    "jsonwebtoken": "^8.5.1",
+    "passport": "^0.4.0",
+    "passport-twitter": "^1.0.4",
+    "sequelize": "^5.19.3",
+    "shortid": "^2.2.15",
+    "socket.io": "^2.3.0",
+    "sqlite3": "^4.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
+    "@babel/node": "^7.6.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/plugin-transform-async-to-generator": "^7.5.0",
+    "@babel/preset-env": "^7.6.2",
+    "nodemon": "^1.19.3"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "thank-u-next",
+  "private": true,
+  "version": "0.1.0",
+  "license": "MIT",
+  "workspaces": [
+    "client",
+    "server",
+    "database"
+  ],
+  "scripts": {
+    "start:client": "yarn workspace @tyn/client start",
+    "start:server": "yarn workspace @tyn/server start",
+    "build:client": "yarn workspace @tyn/client build",
+    "build:server": "yarn workspace @tyn/server build",
+    "db": "yarn workspace @tyn/database db"
+  }
+}
