@@ -1,0 +1,7 @@
+.DS_Store
+.vscode
+.env
+.env.development
+.env.production
+node_modules
+build
