@@ -7,7 +7,7 @@ import cors from "cors"
 import passport from "passport"
 import jwt from "jsonwebtoken"
 import { Strategy as TwitterStrategy } from "passport-twitter"
-// import { createStore } from "@tyn/database"
+import { createStore } from "@tyn/database"
 import createApolloServer from "./graphql"
 
 const TWITTER_CONFIG = {
@@ -20,8 +20,7 @@ const SESSION_SECRET = process.env.SESSION_SECRET
 const TOKEN_SECRET = process.env.TOKEN_SECRET
 const JWT_SECRET = process.env.JWT_SECRET
 
-// const store = createStore()
-const store = null
+const store = createStore()
 
 const app = express()
 const server = http.createServer(app)
@@ -46,22 +45,22 @@ passport.deserializeUser((obj, cb) => cb(null, obj))
 
 passport.use(
   new TwitterStrategy(TWITTER_CONFIG, async (token, secret, profile, cb) => {
-    // const { User } = store
+    const { User } = store
 
-    // let user
+    let user
 
-    // const existingUser = await User.findByPk(profile.id)
-    // if (existingUser) {
-    //   user = existingUser.toJSON()
-    // } else {
-    //   const newUser = await User.create({
-    //     id: profile.id,
-    //     username: profile.username,
-    //     token: jwt.sign(token, TOKEN_SECRET),
-    //     secret: jwt.sign(secret, TOKEN_SECRET),
-    //   })
-    //   user = newUser.toJSON()
-    // }
+    const existingUser = await User.findByPk(profile.id)
+    if (existingUser) {
+      user = existingUser.toJSON()
+    } else {
+      const newUser = await User.create({
+        id: profile.id,
+        username: profile.username,
+        token: jwt.sign(token, TOKEN_SECRET),
+        secret: jwt.sign(secret, TOKEN_SECRET),
+      })
+      user = newUser.toJSON()
+    }
 
     cb(null, user)
   }),
