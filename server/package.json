@@ -19,6 +19,7 @@
     "jsonwebtoken": "^8.5.1",
     "passport": "^0.4.0",
     "passport-twitter": "^1.0.4",
+    "request-promise": "^4.2.4",
     "sequelize": "^5.19.3",
     "shortid": "^2.2.15",
     "socket.io": "^2.3.0",

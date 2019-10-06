@@ -1,6 +1,8 @@
 const resolvers = {
   Query: {
-    hello: () => {
+    hello: async (root, args, { twitterAPI }) => {
+      const response = await twitterAPI.getFriends()
+      console.log(response)
       return "Hello world!"
     },
   },
