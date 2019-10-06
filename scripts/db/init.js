@@ -1,5 +1,4 @@
-import SQL from "sequelize"
-import { createStore } from "../src"
+import { createStore } from "@tyn/database"
 
 async function init() {
   const { User, Whitelist, Message } = createStore()

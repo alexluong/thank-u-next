@@ -17,7 +17,7 @@ exports.createStore = function() {
     username: Sequelize.STRING,
     token: Sequelize.STRING,
     secret: Sequelize.STRING,
-    webhookUrl: Sequelize.STRING,
+    webhookId: Sequelize.STRING,
   })
 
   const Whitelist = db.define("whitelist", {

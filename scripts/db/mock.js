@@ -1,5 +1,4 @@
-import SQL from "sequelize"
-import { createStore } from "../src"
+import { createStore } from "@tyn/database"
 import faker from "faker"
 import shortId from "shortid"
 

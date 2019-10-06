@@ -1,12 +1,11 @@
 {
-  "name": "@tyn/database",
+  "name": "@tyn/twitter",
   "private": true,
   "version": "1.0.0",
   "license": "MIT",
   "main": "src/index.js",
   "dependencies": {
-    "sequelize": "^5.19.3",
-    "sqlite3": "^4.1.0"
+    "request-promise": "^4.2.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
@@ -14,6 +13,8 @@
     "@babel/node": "^7.6.2",
     "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
     "@babel/plugin-transform-async-to-generator": "^7.5.0",
-    "@babel/preset-env": "^7.6.2"
+    "@babel/preset-env": "^7.6.2",
+    "dotenv-cli": "^2.0.1",
+    "faker": "^4.1.0"
   }
 }
