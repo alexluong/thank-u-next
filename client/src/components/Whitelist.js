@@ -12,7 +12,7 @@ function Whitelist() {
 
       <List styleType="disc">
         {whitelist.map(user => (
-          <ListItem key={user}>@{user}}</ListItem>
+          <ListItem key={user}>@{user}</ListItem>
         ))}
       </List>
 
