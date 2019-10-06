@@ -17,7 +17,32 @@ exports.createStore = function() {
     username: Sequelize.STRING,
     token: Sequelize.STRING,
     secret: Sequelize.STRING,
+    webhookUrl: Sequelize.STRING,
   })
 
-  return { User }
+  const Whitelist = db.define("whitelist", {
+    id: {
+      type: Sequelize.STRING,
+      primaryKey: true,
+    },
+    whitelistUserId: Sequelize.STRING,
+    whitelistUsername: Sequelize.STRING,
+  })
+
+  const Message = db.define("message", {
+    id: {
+      type: Sequelize.STRING,
+      primaryKey: true,
+    },
+    message: Sequelize.STRING,
+    fromUserId: Sequelize.STRING,
+    fromUsername: Sequelize.STRING,
+  })
+
+  User.hasMany(Whitelist)
+  Whitelist.belongsTo(User)
+  User.hasMany(Message)
+  Message.belongsTo(User)
+
+  return { User, Whitelist, Message }
 }
