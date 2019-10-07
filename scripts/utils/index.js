@@ -1,16 +1,16 @@
 import TwitterAPI from "@tyn/twitter"
-import { createStore } from "@tyn/database"
 import jwt from "jsonwebtoken"
 
 const TOKEN_SECRET = process.env.TOKEN_SECRET
 const TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY
 const TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET
+const TWITTER_BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN
 const TWITTER_USER_ID = process.env.TWITTER_USER_ID
 const TWITTER_WEBHOOK_ENV = process.env.TWITTER_WEBHOOK_ENV
 const API_URL = process.env.API_URL
 
-async function getWebhook() {
-  const { User } = createStore()
+export async function createTwitterAPI(store) {
+  const { User } = store
 
   const user = await User.findByPk(TWITTER_USER_ID)
   const { token, secret } = user.toJSON()
@@ -24,12 +24,10 @@ async function getWebhook() {
     },
     apiUrl: API_URL,
     webhookEnv: TWITTER_WEBHOOK_ENV,
+    bearerToken: TWITTER_BEARER_TOKEN,
   }
 
   const twitterAPI = new TwitterAPI(config)
 
-  const friends = await twitterAPI.getFriends()
-  console.log(friends)
+  return twitterAPI
 }
-
-getWebhook()
