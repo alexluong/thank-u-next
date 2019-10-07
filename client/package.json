@@ -13,10 +13,16 @@
     "@chakra-ui/core": "^0.3.2",
     "@emotion/core": "^10.0.20",
     "@emotion/styled": "^10.0.17",
+    "@urql/exchange-graphcache": "^1.0.3",
     "emotion-theming": "^10.0.19",
     "gatsby": "^2.15.29",
+    "graphql": "^14.5.8",
+    "graphql-tag": "^2.10.1",
+    "isomorphic-fetch": "^2.2.1",
+    "prop-types": "^15.7.2",
     "react": "^16.10.2",
-    "react-dom": "^16.10.2"
+    "react-dom": "^16.10.2",
+    "urql": "^1.5.1"
   },
   "devDependencies": {
     "dotenv": "^8.1.0"

@@ -8,17 +8,17 @@ import passport from "passport"
 import jwt from "jsonwebtoken"
 import { Strategy as TwitterStrategy } from "passport-twitter"
 import { createStore } from "@tyn/database"
+import TwitterAPI from "@tyn/twitter"
 import createApolloServer from "./graphql"
+import webhookControllers from "./webhook"
+import { createTwitterAPI } from "./utils"
 
-const TWITTER_CONFIG = {
-  consumerKey: process.env.TWITTER_CONSUMER_KEY,
-  consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-  callbackURL: `${process.env.API_URL}/twitter/callback`,
-}
-
+const API_URL = process.env.API_URL
 const SESSION_SECRET = process.env.SESSION_SECRET
 const TOKEN_SECRET = process.env.TOKEN_SECRET
 const JWT_SECRET = process.env.JWT_SECRET
+const TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY
+const TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET
 
 const store = createStore()
 
@@ -43,9 +43,15 @@ app.use(
 passport.serializeUser((user, cb) => cb(null, user))
 passport.deserializeUser((obj, cb) => cb(null, obj))
 
+const twitterConfig = {
+  consumerKey: TWITTER_CONSUMER_KEY,
+  consumerSecret: TWITTER_CONSUMER_SECRET,
+  callbackURL: `${API_URL}/twitter/callback`,
+}
+
 passport.use(
-  new TwitterStrategy(TWITTER_CONFIG, async (token, secret, profile, cb) => {
-    const { User } = store
+  new TwitterStrategy(twitterConfig, async (token, secret, profile, cb) => {
+    const { User, Whitelist } = store
 
     let user
 
@@ -60,6 +66,15 @@ passport.use(
         secret: jwt.sign(secret, TOKEN_SECRET),
       })
       user = newUser.toJSON()
+
+      const twitterAPI = createTwitterAPI({ token, secret })
+      const friends = await twitterAPI.getFriends()
+      await Whitelist.bulkCreate(
+        friends.ids.map(id => ({
+          id: `${profile.id}.${id}`,
+          whitelistUserId: id,
+        })),
+      )
     }
 
     cb(null, user)
@@ -83,6 +98,9 @@ app.get("/twitter/callback", twitterAuth, (req, res) => {
   res.end()
 })
 
+app.get("/twitter/webhook", webhookControllers.get)
+app.post("/twitter/webhook", webhookControllers.post)
+
 // Apollo
 const apolloServer = createApolloServer(store)
 apolloServer.applyMiddleware({ app })
@@ -90,5 +108,5 @@ apolloServer.applyMiddleware({ app })
 // Start server
 const PORT = process.env.PORT || 8080
 server.listen({ port: PORT }, () =>
-  console.log(`🚀 GraphQL ready at http://127.0.0.1:${PORT}/graphql`),
+  console.log(`🚀 GraphQL ready at ${API_URL}:${PORT}/graphql`),
 )

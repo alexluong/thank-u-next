@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@tyn/database": "1.0.0",
+    "@tyn/twitter": "1.0.0",
     "apollo-datasource": "^0.6.3",
     "apollo-server-express": "^2.9.5",
     "cors": "^2.8.5",

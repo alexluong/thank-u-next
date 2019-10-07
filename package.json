@@ -6,13 +6,15 @@
   "workspaces": [
     "client",
     "server",
-    "database"
+    "database",
+    "twitter",
+    "scripts"
   ],
   "scripts": {
     "start:client": "yarn workspace @tyn/client start",
     "start:server": "yarn workspace @tyn/server start",
     "build:client": "yarn workspace @tyn/client build",
     "build:server": "yarn workspace @tyn/server build",
-    "db": "yarn workspace @tyn/database db"
+    "scripts": "yarn workspace @tyn/scripts scripts"
   }
 }

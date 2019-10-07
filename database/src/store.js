@@ -5,7 +5,6 @@ exports.createStore = function() {
   const db = new Sequelize("database", "username", "password", {
     dialect: "sqlite",
     storage: path.join(__dirname, "..", `store.${process.env.NODE_ENV}.sqlite`),
-    operatorsAliases: { $in: Sequelize.Op.in },
     logging: false,
   })
 
@@ -17,7 +16,7 @@ exports.createStore = function() {
     username: Sequelize.STRING,
     token: Sequelize.STRING,
     secret: Sequelize.STRING,
-    webhookId: Sequelize.STRING,
+    isWebhookEnabled: Sequelize.BOOLEAN,
   })
 
   const Whitelist = db.define("whitelist", {
