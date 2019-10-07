@@ -9,8 +9,8 @@ class TwitterAPI {
    * {
    *   oauth: Oauth,
    *   webhookEnv: "",
-   *   apiUrl: "",
    *   bearerToken: "",
+   *   apiUrl: "",
    * }
    */
   constructor(config) {
