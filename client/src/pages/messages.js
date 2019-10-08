@@ -1,15 +1,14 @@
 import React from "react"
-import { Link } from "gatsby"
-import { Button } from "@chakra-ui/core"
 import Layout from "../components/Layout"
-import { COLORS } from "../utils/constants"
+import Container from "../components/Container"
+import Messages from "../components/Messages"
 
 function MessagesPage() {
   return (
     <Layout>
-      <Button as={Link} to="/dashboard" variantColor={COLORS.primary}>
-        Dashboard
-      </Button>
+      <Container>
+        <Messages />
+      </Container>
     </Layout>
   )
 }

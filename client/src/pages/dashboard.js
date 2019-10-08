@@ -1,11 +1,11 @@
 import React from "react"
 import { useQuery, useMutation } from "urql"
 import gql from "graphql-tag"
-import { Grid, Text } from "@chakra-ui/core"
+import { Text } from "@chakra-ui/core"
 import Layout from "../components/Layout"
+import Container from "../components/Container"
 import Webhook from "../components/Webhook"
-import Whitelist from "../components/Whitelist"
-import Messages from "../components/Messages"
+import MessageStatus from "../components/MessageStatus"
 
 const dashboardViewQuery = gql`
   query {
@@ -37,7 +37,9 @@ function DashboardPage() {
     console.log(res.error)
     return (
       <Layout>
-        <Text>Error...</Text>
+        <Container>
+          <Text>Error...</Text>
+        </Container>
       </Layout>
     )
   }
@@ -46,17 +48,13 @@ function DashboardPage() {
 
   return (
     <Layout>
-      <Grid
-        templateAreas="'webhook messages' 'whitelist messages' '. messages'"
-        templateColumns="3fr 7fr"
-      >
+      <Container>
         <Webhook
           isWebhookEnabled={dashboardView.isWebhookEnabled}
           toggleWebhook={toggleWebhook}
         />
-        <Whitelist />
-        <Messages />
-      </Grid>
+        <MessageStatus messageNumber={50} />
+      </Container>
     </Layout>
   )
 }

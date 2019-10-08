@@ -11,7 +11,7 @@ import {
   MenuItem,
 } from "@chakra-ui/core"
 import { useAuth } from "./AuthContext"
-import { COLORS } from "../utils/constants"
+import { COLORS, MAX_CONTAINER_WIDTH } from "../utils/constants"
 
 function Navigation() {
   const { username, signOut } = useAuth()
@@ -27,8 +27,8 @@ function Navigation() {
         align={["start", "start", "center"]}
         justify="space-between"
         direction={["column", "column", "row"]}
+        maxW={MAX_CONTAINER_WIDTH}
         w="100%"
-        maxW={1200}
         mx="auto"
       >
         <Link to="/dashboard">

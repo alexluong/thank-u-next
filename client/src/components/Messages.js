@@ -8,9 +8,9 @@ function Messages() {
   }
 
   return (
-    <Card gridArea="messages">
+    <Card>
       <Heading as="h2" size="md" mb={4}>
-        Messages
+        Deleted Messages
       </Heading>
 
       <List>

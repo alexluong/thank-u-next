@@ -6,7 +6,7 @@ import { COLORS } from "../utils/constants"
 
 function Webhook({ isWebhookEnabled, toggleWebhook }) {
   return (
-    <Card gridArea="webhook">
+    <Card>
       <Heading as="h2" size="md" mb={4}>
         Filter
       </Heading>
