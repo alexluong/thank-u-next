@@ -1,0 +1,9 @@
+{
+  "name": "@tyn/thank-u-next",
+  "private": true,
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "badwords": "^1.0.0"
+  }
+}
