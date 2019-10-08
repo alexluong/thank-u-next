@@ -3,9 +3,10 @@ import { createStore } from "@tyn/database"
 
 async function run() {
   const store = createStore()
-  const user = await store.User.findByPk(process.env.TWITTER_USER_ID)
   const twitterAPI = await createTwitterAPI(store)
-  const response = await twitterAPI.deleteWebhook(user.toJSON().webhookId)
+  const webhooks = await twitterAPI.getWebhook()
+  const webhookId = webhooks[0].id
+  const response = await twitterAPI.deleteWebhook(webhookId)
   console.log(response)
 }
 
