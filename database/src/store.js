@@ -25,7 +25,7 @@ exports.createStore = function() {
       primaryKey: true,
     },
     whitelistUserId: Sequelize.STRING,
-    whitelistUsername: Sequelize.STRING,
+    // userId: Sequelize.STRING --> from association
   })
 
   const Message = db.define("message", {
@@ -35,7 +35,8 @@ exports.createStore = function() {
     },
     message: Sequelize.STRING,
     fromUserId: Sequelize.STRING,
-    fromUsername: Sequelize.STRING,
+    fromUserName: Sequelize.STRING,
+    // userId: Sequelize.STRING --> from association
   })
 
   User.hasMany(Whitelist)

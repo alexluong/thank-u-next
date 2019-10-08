@@ -8,10 +8,9 @@ import passport from "passport"
 import jwt from "jsonwebtoken"
 import { Strategy as TwitterStrategy } from "passport-twitter"
 import { createStore } from "@tyn/database"
-import TwitterAPI from "@tyn/twitter"
-import createApolloServer from "./graphql"
-import webhookControllers from "./webhook"
 import { createTwitterAPI } from "./utils"
+import createApolloServer from "./graphql"
+import WebhookControllers from "./webhook"
 
 const API_URL = process.env.API_URL
 const SESSION_SECRET = process.env.SESSION_SECRET
@@ -73,6 +72,7 @@ passport.use(
         friends.ids.map(id => ({
           id: `${profile.id}.${id}`,
           whitelistUserId: id,
+          userId: profile.id,
         })),
       )
     }
@@ -98,8 +98,11 @@ app.get("/twitter/callback", twitterAuth, (req, res) => {
   res.end()
 })
 
-app.get("/twitter/webhook", webhookControllers.get)
-app.post("/twitter/webhook", webhookControllers.post)
+// Twitter Webhooks
+const webhookControllers = new WebhookControllers(store)
+
+app.get("/twitter/webhook", (req, res) => webhookControllers.get(req, res))
+app.post("/twitter/webhook", (req, res) => webhookControllers.post(req, res))
 
 // Apollo
 const apolloServer = createApolloServer(store)

@@ -8,7 +8,8 @@
     "server",
     "database",
     "twitter",
-    "scripts"
+    "scripts",
+    "thank-u-next"
   ],
   "scripts": {
     "start:client": "yarn workspace @tyn/client start",
