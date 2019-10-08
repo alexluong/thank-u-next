@@ -111,5 +111,5 @@ apolloServer.applyMiddleware({ app })
 // Start server
 const PORT = process.env.PORT || 8080
 server.listen({ port: PORT }, () =>
-  console.log(`🚀 GraphQL ready at ${API_URL}:${PORT}/graphql`),
+  console.log(`🚀 GraphQL ready at ${API_URL}/graphql`),
 )

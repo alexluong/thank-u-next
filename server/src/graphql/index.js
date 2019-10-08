@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken"
 import typeDefs from "./schema"
 import resolvers from "./resolvers"
 import UserAPI from "./datasources/user"
+import MessageAPI from "./datasources/message"
 import { createTwitterAPI } from "../utils"
 
 const JWT_SECRET = process.env.JWT_SECRET
@@ -11,6 +12,7 @@ const TOKEN_SECRET = process.env.TOKEN_SECRET
 function createApolloServer(store) {
   const dataSources = () => ({
     userAPI: new UserAPI({ store }),
+    messageAPI: new MessageAPI({ store }),
   })
 
   const context = ({ req }) => {

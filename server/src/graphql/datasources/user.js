@@ -1,5 +1,4 @@
 import { DataSource } from "apollo-datasource"
-import shortId from "shortid"
 
 class UserAPI extends DataSource {
   constructor({ store }) {

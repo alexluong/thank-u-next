@@ -16,6 +16,38 @@ const resolvers = {
         isWebhookEnabled: Boolean(dbUser.toJSON().isWebhookEnabled),
       }
     },
+
+    /**
+     * Messages View
+     */
+    messagesView: async (root, args, { user, dataSources }) => {
+      const messages = await dataSources.messageAPI.findMessagesByUser(user.id)
+      let conversations = messages.reduce((acc, message) => {
+        const messageData = {
+          id: message.id,
+          message: message.message,
+          createdAt: message.createdAt,
+        }
+        if (acc.has(message.fromUserId)) {
+          const data = acc.get(message.fromUserId)
+          acc.set(message.fromUserId, {
+            ...data,
+            messages: [...data.messages, messageData],
+          })
+        } else {
+          acc.set(message.fromUserId, {
+            id: message.fromUserId,
+            fromUserId: message.fromUserId,
+            messages: [messageData],
+          })
+        }
+        return acc
+      }, new Map())
+      return {
+        id: "MessagesView",
+        conversations,
+      }
+    },
   },
 
   Mutation: {
