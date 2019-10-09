@@ -42,6 +42,7 @@ function isNext(message) {
     .map(toLowerCase)
     .map(isBadWord)
 
+  if (tokens.length === 0) return true
   const numTrue = tokens.reduce((num, isTrue) => (isTrue ? num + 1 : num))
   const percent = (numTrue * 100) / tokens.length
 
