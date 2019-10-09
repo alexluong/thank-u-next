@@ -67,6 +67,12 @@ function Navigation() {
               @{username}
             </MenuButton>
             <MenuList>
+              <MenuItem onClick={() => navigate("/dashboard")}>
+                Dashboard
+              </MenuItem>
+              <MenuItem onClick={() => navigate("/messages")}>
+                Messages
+              </MenuItem>
               <MenuItem onClick={signOutAndNavigate}>Sign out</MenuItem>
             </MenuList>
           </Menu>
