@@ -38,6 +38,7 @@ const resolvers = {
           acc.set(message.fromUserId, {
             id: message.fromUserId,
             fromUserId: message.fromUserId,
+            fromUserName: message.fromUserName,
             messages: [messageData],
           })
         }
