@@ -10,6 +10,7 @@ import {
   AlertIcon,
 } from "@chakra-ui/core"
 import { COLORS } from "../utils/constants"
+import isEmail from "isemail"
 
 function Subscribe() {
   const [email, setEmail] = React.useState("")
@@ -18,6 +19,11 @@ function Subscribe() {
 
   function onSubmitEmail(e) {
     e.preventDefault()
+
+    if (!isEmail.validate(email, { minDomainAtoms: 2 })) {
+      setError(`${email} is not a valid email address.`)
+      return
+    }
 
     fetch(`${process.env.GATSBY_API_URL}/subscribe`, {
       method: "POST",

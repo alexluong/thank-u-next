@@ -2,6 +2,7 @@ import React from "react"
 import { useQuery } from "urql"
 import gql from "graphql-tag"
 import { Text } from "@chakra-ui/core"
+import PrivateRoute from "../components/PrivateRoute"
 import Layout from "../components/Layout"
 import Container from "../components/Container"
 import ConversationList from "../components/ConversationList"
@@ -30,17 +31,23 @@ function MessageListPage() {
   const [selectedConversation, setSelectedConversation] = React.useState(-1)
 
   if (res.fetching) {
-    return <Layout />
+    return (
+      <PrivateRoute>
+        <Layout />
+      </PrivateRoute>
+    )
   }
 
   if (res.error) {
     console.log(res.error)
     return (
-      <Layout>
-        <Container>
-          <Text>Error...</Text>
-        </Container>
-      </Layout>
+      <PrivateRoute>
+        <Layout>
+          <Container>
+            <Text>Error...</Text>
+          </Container>
+        </Layout>
+      </PrivateRoute>
     )
   }
 
@@ -57,21 +64,23 @@ function MessageListPage() {
   }
 
   return (
-    <Layout>
-      <Container>
-        {selectedConversation === -1 ? (
-          <ConversationList
-            conversations={conversations}
-            onConversationClick={onConversationClick}
-          />
-        ) : (
-          <Conversation
-            conversation={conversations[selectedConversation]}
-            back={back}
-          />
-        )}
-      </Container>
-    </Layout>
+    <PrivateRoute>
+      <Layout>
+        <Container>
+          {selectedConversation === -1 ? (
+            <ConversationList
+              conversations={conversations}
+              onConversationClick={onConversationClick}
+            />
+          ) : (
+            <Conversation
+              conversation={conversations[selectedConversation]}
+              back={back}
+            />
+          )}
+        </Container>
+      </Layout>
+    </PrivateRoute>
   )
 }
 

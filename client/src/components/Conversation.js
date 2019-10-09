@@ -45,8 +45,8 @@ function Conversation({ conversation, back }) {
         </Heading>
       </Card>
 
-      {reversedMessageList.map(message => (
-        <Card my={8} py={4}>
+      {reversedMessageList.map((message, i) => (
+        <Card key={i} my={8} py={4}>
           <Text fontSize="sm" mb="2" color="gray.500">
             {formatDistanceToNow(new Date(Number(message.createdAt)), {
               addSuffix: true,

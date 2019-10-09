@@ -14,11 +14,11 @@ function Auth({ children }) {
 
   React.useEffect(() => {
     function onToken({ token, username }) {
+      popup.close()
       localStorage.setItem("accessToken", JSON.stringify(token))
       localStorage.setItem("username", JSON.stringify(username))
       setIsAuthenticated(true)
       setUsername(username)
-      popup.close()
       navigate("/dashboard")
     }
     socket.on("token", onToken)
