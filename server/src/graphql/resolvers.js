@@ -11,9 +11,14 @@ const resolvers = {
      */
     dashboardView: async (root, args, { user, dataSources }) => {
       const dbUser = await dataSources.userAPI.findUser(user.id)
+      const messages = await dataSources.messageAPI.findLastWeekMessages(
+        user.id,
+      )
+
       return {
         id: "DashboardView",
         isWebhookEnabled: Boolean(dbUser.toJSON().isWebhookEnabled),
+        numMessageLastWeek: messages.length,
       }
     },
 

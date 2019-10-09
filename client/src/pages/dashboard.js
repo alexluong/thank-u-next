@@ -12,6 +12,7 @@ const dashboardViewQuery = gql`
     dashboardView {
       id
       isWebhookEnabled
+      numMessageLastWeek
     }
   }
 `
@@ -53,7 +54,7 @@ function DashboardPage() {
           isWebhookEnabled={dashboardView.isWebhookEnabled}
           toggleWebhook={toggleWebhook}
         />
-        <MessageStatus messageNumber={50} />
+        <MessageStatus messageNumber={dashboardView.numMessageLastWeek} />
       </Container>
     </Layout>
   )

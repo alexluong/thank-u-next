@@ -14,6 +14,7 @@ const typeDefs = gql`
   type DashboardView {
     id: ID!
     isWebhookEnabled: Boolean!
+    numMessageLastWeek: Int!
   }
 
   type MessagesView {

@@ -11,6 +11,7 @@ function MessageStatus({ messageNumber }) {
       <Heading as="h2" size="md" mb={4}>
         Status
       </Heading>
+
       <Text d="flex" alignContent="center">
         <Box as="span" mr="4">
           <Box as="b">{messageNumber}</Box> messages removed last month
