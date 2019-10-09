@@ -44,14 +44,14 @@ function IndexPage() {
       >
         <Box borderRadius={16} overflow="hidden">
           <Box as="header" textAlign="center" py={16} px={4} bg="white">
-            <Box
+            <span
               as="span"
               role="img"
               aria-label="woman gesturing no"
-              fontSize="60px"
+              style={{ fontSize: 60 }}
             >
               🙅‍♀️
-            </Box>
+            </span>
             <Heading as="h1" color={`${COLORS.primary}.500`} mb={4}>
               thank u, next
             </Heading>
@@ -124,7 +124,7 @@ function IndexPage() {
               </Flex>
 
               <Textarea
-                placeholder="Type a test message - e.g. Hi"
+                placeholder="Try a test message - e.g. Hi"
                 value={message}
                 onChange={e => {
                   setMessage(e.target.value)
@@ -145,9 +145,9 @@ function IndexPage() {
             <Box maxW={MAX_WIDTH} w="100%" mx="auto">
               <Text mb={2}>
                 Made with{" "}
-                <Box as="span" role="img" aria-label="heart">
+                <span role="img" aria-label="heart">
                   ❤️
-                </Box>{" "}
+                </span>{" "}
                 by{" "}
                 <Link isExternal href="https://alexluong.com">
                   Alex Luong
