@@ -1,10 +1,11 @@
 import React from "react"
 import { useQuery } from "urql"
 import gql from "graphql-tag"
-import { Heading, List, ListItem, Text, PseudoBox, Box } from "@chakra-ui/core"
+import { Text } from "@chakra-ui/core"
 import Layout from "../components/Layout"
 import Container from "../components/Container"
-import Card from "../components/Card"
+import ConversationList from "../components/ConversationList"
+import Conversation from "../components/Conversation"
 
 const messagesViewQuery = gql`
   query {
@@ -24,8 +25,9 @@ const messagesViewQuery = gql`
   }
 `
 
-function MessagesPage() {
+function MessageListPage() {
   const [res] = useQuery({ query: messagesViewQuery })
+  const [selectedConversation, setSelectedConversation] = React.useState(-1)
 
   if (res.fetching) {
     return <Layout />
@@ -46,47 +48,31 @@ function MessagesPage() {
     messagesView: { conversations },
   } = res.data
 
-  function onConversationClick(conversation) {
-    console.log(conversation)
+  function onConversationClick(index) {
+    setSelectedConversation(index)
+  }
+
+  function back() {
+    setSelectedConversation(-1)
   }
 
   return (
     <Layout>
       <Container>
-        <Card>
-          <Heading as="h2" size="md" mb={4}>
-            Deleted Messages
-          </Heading>
-
-          <List>
-            {conversations.map(conversation => (
-              <PseudoBox
-                key={conversation.id}
-                as={ListItem}
-                mx={-4}
-                mb={4}
-                borderRadius={4}
-                _hover={{ bg: "gray.100" }}
-                _focusWithin={{ bg: "gray.100" }}
-                onClick={() => onConversationClick(conversation)}
-                onKeyDown={e => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    onConversationClick(conversation)
-                  }
-                }}
-                tabIndex="0"
-              >
-                <Box p={4} cursor="pointer">
-                  <Text fontSize="sm">@{conversation.fromUserName}</Text>
-                  <Text>{conversation.messages[0].message}</Text>
-                </Box>
-              </PseudoBox>
-            ))}
-          </List>
-        </Card>
+        {selectedConversation === -1 ? (
+          <ConversationList
+            conversations={conversations}
+            onConversationClick={onConversationClick}
+          />
+        ) : (
+          <Conversation
+            conversation={conversations[selectedConversation]}
+            back={back}
+          />
+        )}
       </Container>
     </Layout>
   )
 }
 
-export default MessagesPage
+export default MessageListPage
