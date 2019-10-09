@@ -11,6 +11,11 @@ import { createStore } from "@tyn/database"
 import { createTwitterAPI } from "./utils"
 import createApolloServer from "./graphql"
 import WebhookControllers from "./webhook"
+import request from "request-promise"
+
+const EO_LIST_ID = process.env.EO_LIST_ID
+const EO_API_KEY = process.env.EO_API_KEY
+const EO_API_URL = `https://emailoctopus.com/api/1.5/lists/${EO_LIST_ID}/contacts`
 
 const API_URL = process.env.API_URL
 const SESSION_SECRET = process.env.SESSION_SECRET
@@ -103,6 +108,26 @@ const webhookControllers = new WebhookControllers(store)
 
 app.get("/twitter/webhook", (req, res) => webhookControllers.get(req, res))
 app.post("/twitter/webhook", (req, res) => webhookControllers.post(req, res))
+
+// Subscribe email list
+app.post("/subscribe", async (req, res) => {
+  try {
+    await request.post({
+      uri: EO_API_URL,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        api_key: EO_API_KEY,
+        email_address: req.body.email,
+      }),
+    })
+    res.sendStatus(200)
+  } catch (error) {
+    console.log(error)
+    res.sendStatus(500)
+  }
+})
 
 // Apollo
 const apolloServer = createApolloServer(store)

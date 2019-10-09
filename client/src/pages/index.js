@@ -1,5 +1,5 @@
 import React from "react"
-import { Link as GatsbyLink } from "gatsby"
+// import { Link as GatsbyLink } from "gatsby"
 import {
   Box,
   Flex,
@@ -13,16 +13,17 @@ import {
   Heading,
 } from "@chakra-ui/core"
 import { Planet } from "react-kawaii"
-import TwitterIcon from "../components/TwitterIcon"
-import Auth from "../components/Auth"
-import { useAuth } from "../components/AuthContext"
+import Subscribe from "../components/Subscribe"
+// import TwitterIcon from "../components/TwitterIcon"
+// import Auth from "../components/Auth"
+// import { useAuth } from "../components/AuthContext"
 import { isNext } from "@tyn/thank-u-next"
 import { COLORS } from "../utils/constants"
 
 const MAX_WIDTH = 650
 
 function IndexPage() {
-  const { isAuthenticated } = useAuth()
+  // const { isAuthenticated } = useAuth()
   const [message, setMessage] = React.useState("")
   const [isHappy, setIsHappy] = React.useState(true)
 
@@ -33,12 +34,11 @@ function IndexPage() {
       setIsHappy(true)
     }
   }
-  // background-color: #e899dc;
-  // background-image: linear-gradient(315deg, #e899dc 0%, #d387ab 74%);
+
   return (
     <>
       <Box
-        p={8}
+        p={[2, 6, 8]}
         backgroundColor="#e899dc"
         backgroundImage="linear-gradient(315deg, #e899dc 0%, #d387ab 74%)"
       >
@@ -58,7 +58,10 @@ function IndexPage() {
             <Heading as="h2" size="md" color={`${COLORS.primary}.400`} mb={8}>
               Twitter Direct Message Filter Against Harassment
             </Heading>
-            {isAuthenticated ? (
+
+            <Subscribe />
+
+            {/* {isAuthenticated ? (
               <Button
                 as={GatsbyLink}
                 to="/dashboard"
@@ -75,7 +78,7 @@ function IndexPage() {
                   </Box>
                 </Button>
               </Auth>
-            )}
+            )} */}
           </Box>
 
           <Box as="section" bg="white">
@@ -133,6 +136,7 @@ function IndexPage() {
                 maxW={350}
                 mx="auto"
                 mb={8}
+                focusBorderColor={`${COLORS.primary}.500`}
               />
 
               <Button variantColor={COLORS.primary} onClick={onMessageTest}>

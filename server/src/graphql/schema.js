@@ -8,6 +8,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
+    subscribe(email: String!): Boolean!
     toggleWebhook: DashboardView!
   }
 
