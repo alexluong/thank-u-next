@@ -6,6 +6,8 @@ import Card from "./Card"
 import { COLORS } from "../utils/constants"
 
 function Conversation({ conversation, back }) {
+  const reversedMessageList = [...conversation.messages].reverse()
+
   return (
     <>
       <Button
@@ -43,7 +45,7 @@ function Conversation({ conversation, back }) {
         </Heading>
       </Card>
 
-      {conversation.messages.reverse().map(message => (
+      {reversedMessageList.map(message => (
         <Card my={8} py={4}>
           <Text fontSize="sm" mb="2" color="gray.500">
             {formatDistanceToNow(new Date(Number(message.createdAt)), {
