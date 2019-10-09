@@ -13,6 +13,7 @@
     "@chakra-ui/core": "^0.3.2",
     "@emotion/core": "^10.0.20",
     "@emotion/styled": "^10.0.17",
+    "@tyn/thank-u-next": "1.0.0",
     "@urql/exchange-graphcache": "^1.0.3",
     "date-fns": "^2.4.1",
     "emotion-theming": "^10.0.19",
@@ -23,6 +24,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "react-kawaii": "^0.14.4",
     "urql": "^1.5.1"
   },
   "devDependencies": {
