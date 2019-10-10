@@ -129,6 +129,8 @@ app.post("/subscribe", async (req, res) => {
   }
 })
 
+app.get("/ping", (req, res) => res.status(200).send("pong"))
+
 // Apollo
 const apolloServer = createApolloServer(store)
 apolloServer.applyMiddleware({ app })
