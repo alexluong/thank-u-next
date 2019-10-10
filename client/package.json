@@ -18,6 +18,8 @@
     "date-fns": "^2.4.1",
     "emotion-theming": "^10.0.19",
     "gatsby": "^2.15.29",
+    "gatsby-plugin-google-analytics": "^2.1.21",
+    "gatsby-plugin-react-helmet": "^3.1.11",
     "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",
     "isemail": "^3.2.0",
@@ -25,6 +27,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "react-helmet": "^5.2.1",
     "react-kawaii": "^0.14.4",
     "urql": "^1.5.1"
   },

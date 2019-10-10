@@ -9,6 +9,7 @@ import { cacheExchange } from "@urql/exchange-graphcache"
 import fetch from "isomorphic-fetch"
 import { ThemeProvider, ColorModeProvider, CSSReset } from "@chakra-ui/core"
 import { AuthProvider } from "./components/AuthContext"
+import SEO from "./components/SEO"
 
 const cache = cacheExchange({})
 const client = new GraphQLClient({
@@ -31,6 +32,7 @@ function Index({ children }) {
     <GraphQLProvider value={client}>
       <AuthProvider>
         <ThemeProvider>
+          <SEO />
           <CSSReset />
           <ColorModeProvider>{children}</ColorModeProvider>
         </ThemeProvider>
