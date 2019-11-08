@@ -1,10 +1,8 @@
 import { createTwitterAPI } from "../utils"
-import { createStore } from "@tyn/database"
 
 async function run() {
   try {
-    const store = createStore()
-    const twitterAPI = await createTwitterAPI(store)
+    const twitterAPI = await createTwitterAPI()
     const webhooks = await twitterAPI.getWebhook()
     if (webhooks.length > 0) {
       await twitterAPI.deleteWebhook(webhooks[0].id)
